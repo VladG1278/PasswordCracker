@@ -13,8 +13,8 @@ public class BruteForce {
     public BruteForce() {
         tenwords = new File ("10k Password.txt");
         tenwordshash = new File ("10k Password Hash.txt");
-        textToMD5();
-        //System.out.println(find10KPassword("e10adc3949ba59abbe56e057f20f883e"));
+        //textToMD5();
+        System.out.println(find10KPassword("e10adc3949ba59abbe56e057f20f883e"));
 
     }
 
@@ -71,15 +71,14 @@ public class BruteForce {
             e.printStackTrace();
         }
         int line = -1;
-        String tempHash ="";
-        String password = "test";
+        String tempHash;
+        String password = "Not Found";
         while (sc.hasNextLine ()) {
             line ++;
             tempHash = sc.next();
-            System.out.println (tempHash);
-            if (((String)tempHash).equals (hash)) {
-                System.out.println("true");
-                try (Stream<String> lines = Files.lines(Paths.get ("10k Passwords.txt"))) {
+            if (tempHash.equals (tempHash)) {
+                System.out.println(tempHash.getClass ());
+                try (Stream<String> lines = Files.lines(Paths.get ("10k Password.txt"))) {
                     password = lines.skip(line).findFirst().get();
                 } catch (IOException e) {
                     e.printStackTrace();
