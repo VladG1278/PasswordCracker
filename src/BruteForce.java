@@ -1,4 +1,3 @@
-// here's a change
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.Scanner;
@@ -14,7 +13,7 @@ public class BruteForce {
         tenwords = new File ("10k Password.txt");
         tenwordshash = new File ("10k Password Hash.txt");
         //textToMD5();
-        System.out.println(find10KPassword("e10adc3949ba59abbe56e057f20f883e"));
+        System.out.println(find10KPassword("6ea7948856496ea0906185fbbdd5736f"));
 
     }
 
@@ -24,7 +23,7 @@ public class BruteForce {
             java.security.MessageDigest md = java.security.MessageDigest.getInstance("MD5");
             byte[] array = md.digest(md5.getBytes());
             StringBuffer sb = new StringBuffer();
-            for (int i = 0; i < array.length; ++i) {
+            for (int i = 0; i < array.length; i++) {
                 sb.append(Integer.toHexString((array[i] & 0xFF) | 0x100).substring(1,3));
             }
             return sb.toString();
@@ -62,6 +61,10 @@ public class BruteForce {
         }
     }
 
+
+
+
+
     //Check a md5 hash against the 10k password list
     public String find10KPassword (String hash) {
         Scanner sc = null;
@@ -75,21 +78,17 @@ public class BruteForce {
         String password = "Not Found";
         while (sc.hasNextLine ()) {
             line ++;
-            tempHash = sc.next();
-            if (tempHash.equals (tempHash)) {
-                System.out.println(tempHash.getClass ());
+            //This used to be next which broke my code. Took Two days to figure this out
+            tempHash = sc.nextLine();
+            if (hash.equals(tempHash)) {
                 try (Stream<String> lines = Files.lines(Paths.get ("10k Password.txt"))) {
                     password = lines.skip(line).findFirst().get();
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
                 break;
-
             }
-
         }
-
-
         return password;
     }
 
