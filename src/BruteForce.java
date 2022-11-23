@@ -32,6 +32,7 @@ public class BruteForce {
     }
 
     //recursion to generate a whole bunch of text
+    // stupid
     public void RainbowTableArr (int k, int stop) {
         if (k == stop + 1) {
         } else {
