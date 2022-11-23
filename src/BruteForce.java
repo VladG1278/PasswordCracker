@@ -25,7 +25,10 @@ public class BruteForce {
         characters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVXYZ1!2@3#4$5%6^7&8*9(0)-_=+,<.>/?;:'\\\"{}[]~`";
 
         //generates all the possibilities using for k characters using the characters above ex. k= 1 [a,a],[b,a],[c,a] etc.
-        for (int k =0; k < 8; k++) {
+        arr.add("'");
+        arr.add("'");
+        arr.add("'");
+        for (int k =0; k < 4; k++) {
            arr.add("'");
            RainbowTableArr(0, k);
        }
@@ -38,7 +41,7 @@ public class BruteForce {
             for (int i = 0; i < characters.length(); i++) {
                 arr.set(k, characters.substring(i, i + 1));
                 try {
-                    rainbow.write(arr.toString() + "\n");
+                    rainbow.write(toString() + "\n");
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
