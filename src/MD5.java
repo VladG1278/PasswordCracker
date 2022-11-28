@@ -33,7 +33,7 @@ public class MD5 {
     }
 
     //Check a md5 hash against the 10k password list
-    public String find10KPassword(String hash) {
+    public String findPasswordRainbowTable(String hash) {
         Scanner sc = null;
         try {
             sc = new Scanner(tenwordshash).useDelimiter("\\s*\n\\s");

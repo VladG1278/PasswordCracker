@@ -30,7 +30,7 @@ public class SHA256 {
     }
 
 
-        public String find10KPassword (String hash){
+        public String findPasswordRainbowTable (String hash){
             Scanner sc = null;
             try {
                 sc = new Scanner(SHA256Hash).useDelimiter("\\s*\n\\s");

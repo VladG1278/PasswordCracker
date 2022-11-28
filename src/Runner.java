@@ -25,5 +25,6 @@ public class Runner {
         System.out.println("EX: java passcrack (space) 1st argument (space) 2nd argument (space) 3rd argument");
         //BruteForce b = new BruteForce ();
         //BCrypt n = new BCrypt();
+
     }
 }
