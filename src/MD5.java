@@ -12,7 +12,7 @@ public class MD5 {
     File tenwordshash;
 
     public MD5() {
-        tenwordshash = new File("10k Password Hash.txt");
+        tenwordshash = new File("MD5 Hashes.txt");
     }
 
     //Converts a string to its md5 hash
@@ -48,7 +48,7 @@ public class MD5 {
             //This used to be next which broke my code. Took Two days to figure this out
             tempHash = sc.nextLine();
             if (hash.equals(tempHash)) {
-                try (Stream<String> lines = Files.lines(Paths.get("10k Password.txt"))) {
+                try (Stream<String> lines = Files.lines(Paths.get("Dictionary_10k Password.txt"))) {
                     password = lines.skip(line).findFirst().get();
                 } catch (IOException e) {
                     e.printStackTrace();

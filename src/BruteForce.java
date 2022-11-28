@@ -16,7 +16,7 @@ public class BruteForce {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        tenwords = new File("10k Password.txt");
+        tenwords = new File("Dictionary_10k Password.txt");
         md = new MD5();
         sha256 = new SHA256();
         arr = new ArrayList <String>();
