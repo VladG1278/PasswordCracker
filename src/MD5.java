@@ -17,6 +17,8 @@ public class MD5 {
 
     //Converts a string to its md5 hash
     public String MD5(String md5) {
+        // https://stackoverflow.com/questions/415953/how-can-i-generate-an-md5-hash-in-java
+        // dac2009
         try {
             java.security.MessageDigest md = java.security.MessageDigest.getInstance("MD5");
             byte[] array = md.digest(md5.getBytes());
