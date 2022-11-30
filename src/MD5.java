@@ -58,6 +58,11 @@ public class MD5 {
         }
         return password;
     }
+    public String BruteForce (String hash) {
+
+
+        return "";
+    }
 }
 
 

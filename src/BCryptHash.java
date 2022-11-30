@@ -10,7 +10,7 @@ public class BCryptHash {
     public BCryptHash() {
         BcryptHash = new File("BCrypt.txt");
         Dictionary = new File ("Dictionary_10k Password.txt");
-        BCryptHashDictionary();
+        //BCryptHashDictionary();
 
     }
 
@@ -32,6 +32,10 @@ public class BCryptHash {
         while (sc.hasNextLine()) {
             line++;
             tempHash = sc.nextLine();
+
+            //https://www.educative.io/answers/reading-the-nth-line-from-a-file-in-java
+            //for Stream Stuff
+
             if (hash.equals(tempHash)) {
                 try (Stream<String> lines = Files.lines(Paths.get("Dictionary_10k Password.txt"))) {
                     password = lines.skip(line).findFirst().get();
