@@ -1,6 +1,9 @@
 import java.util.ArrayList;
 import java.io.*;
 
+//BCryptHash Start (total 480k)  ::     8:05 am
+//27000 finished at              ::     8:48 am
+
 public class BruteForce {
 
     private File tenwords;

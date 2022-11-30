@@ -29,7 +29,7 @@ public class PassCrack {
                 System.out.println (s.SHA256Encode(string));
             } else if (args [1].equals ("-B")){
                 BCryptHash b = new BCryptHash();
-                //System.out.println (b.Encode());
+                System.out.println (b.BCryptEncode(string));
             }
         } else {
             System.out.println ("Incorrect Arguments. Please Try Again. :( ");

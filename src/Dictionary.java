@@ -27,8 +27,8 @@ public class Dictionary {
                 System.out.println ("The password that matches the hash is: " + password);
             }
         } else if (hashType.equals("-B")) {
-           //b = new BCryptHash();
-          //password = b.findPasswordRainbowTable(hash);
+           b = new BCryptHash();
+          password = b.findPasswordRainbowTable(hash);
             if (password.equals("Not Found")) {
                 System.out.println ("The password was not found. Please use the Brute Force attack for better results.");
             } else {
