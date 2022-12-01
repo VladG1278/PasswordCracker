@@ -45,8 +45,8 @@ public class MD5 {
         String password = "Not Found";
         while (sc.hasNextLine()) {
             line++;
-            //This used to be next which broke my code. Took Two days to figure this out
             tempHash = sc.nextLine();
+            //Stream Stuff From: https://www.educative.io/answers/reading-the-nth-line-from-a-file-in-java
             if (hash.equals(tempHash)) {
                 try (Stream<String> lines = Files.lines(Paths.get("Dictionary_10k Password.txt"))) {
                     password = lines.skip(line).findFirst().get();
@@ -58,11 +58,7 @@ public class MD5 {
         }
         return password;
     }
-    public String BruteForce (String hash) {
 
-
-        return "";
-    }
 }
 
 
