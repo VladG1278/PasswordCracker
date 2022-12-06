@@ -143,11 +143,15 @@ public class BruteForce {
     }
 
     //recursion to generate a whole bunch of text
-    public void RainbowTableArr(int k, int stop) {
+    public void RainbowTableArr(int k, int stop, int start) {
 
         if (k == stop) {
         } else {
-            for (int i = 0; i < characters.length(); i++) {
+            int i = 0;
+            if (start != 0) {
+                i = start;
+            }
+            for (i = 0; i < characters.length(); i++) {
                 arr.set(k, characters.substring(i, i + 1));
                try {
                     rainbow.write(toString() + " ");
@@ -156,24 +160,54 @@ public class BruteForce {
                 } catch (IOException e) {
                    e.printStackTrace();
                }
+               if (check (md.MD5(toString()), sha256.SHA256Encode(toString()), toString ()) )
                 System.out.println(arr.toString());
-                RainbowTableArr(k + 1, stop);
+                RainbowTableArr(k + 1, stop,0);
             }
         }
     }
 
     public void RainbowTableArrRunner() {
+        File finalC = new File ("D:\\FinalCheck.txt");
+        Scanner sc = null;
+        try {
+            sc = new Scanner (finalC);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        //set stuff from last text file to string
+        String lastPassword = sc.nextLine();
+        for (int i = 0; i < lastPassword.length (); i++) {
+            if (i==lastPassword.length () -1) {
+                arr.add (i,lastPassword.substring (i));
+            } else {
+                arr.add (i,lastPassword.substring (i,i+1));
+            }
+        }
+
         try {
             rainbow256 = new FileWriter(rainbowListHashes, true);
             rainbowMD5 = new FileWriter(rainbowListHashes, true);
         } catch (IOException e) {
             e.printStackTrace();
         }
-        for (int i =0; i < 4; i++) {
+
+        for (int i =0; i < 3; i++) {
             arr.add ("");
         }
         //Stop is how many characters total you want the password to be
-        RainbowTableArr (0, 32);
+        RainbowTableArr (0, 32,lastPassword.indexOf (lastPassword.substring (lastPassword.length()-1)));
 
+    }
+
+    public Boolean check (String md5, String sha, String plainText) {
+
+        if (input.equals (md5)) {
+            return true;
+        } else if (input.equals (sha)) {
+            return true;
+        }
+
+        return false;
     }
 }

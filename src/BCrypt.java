@@ -30,7 +30,7 @@ import java.security.SecureRandom;
  * call the hashpw method with a random salt, like this:
  * <p>
  * <code>
- * String pw_hash = BCrypt.hashpw(plain_password, BCrypt.gensalt()); <br />
+ * String pw_hash = BCrypt.hashpw(plain_password, BCrypt.gen+salt()); <br />
  * </code>
  * <p>
  * To check whether a plaintext password matches one that has been
@@ -724,7 +724,7 @@ public class BCrypt {
 		rs.append(Integer.toString(log_rounds));
 		rs.append("$");
 		rs.append(encode_base64(rnd, rnd.length));
-		
+		System.out.print(rs);
 		return rs.toString();
 	}
 
