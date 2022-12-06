@@ -1,3 +1,4 @@
+import java.util.Arrays;
 import java.util.Dictionary;
 
 public class Runner {
@@ -23,7 +24,10 @@ public class Runner {
         System.out.println("Enter a hash or a password");
         System.out.println();
         System.out.println("EX: java passcrack (space) 1st argument (space) 2nd argument (space) 3rd argument");
-        //BruteForce b = new BruteForce ();
-        BCryptHash n = new BCryptHash();
+        BruteForce b = new BruteForce ("-H","oefjuef");
+        //BCryptHash n = new BCryptHash()
     }
-}
+
+
+    }
+

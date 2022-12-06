@@ -10,6 +10,8 @@ public class PassCrack {
 
             }
 
+
+
         } else if (args [0].equals ("-D")) {
             Dictionary d;
             if (args [1].equals ("-M")){

@@ -724,6 +724,7 @@ public class BCrypt {
 		rs.append(Integer.toString(log_rounds));
 		rs.append("$");
 		rs.append(encode_base64(rnd, rnd.length));
+		
 		return rs.toString();
 	}
 
