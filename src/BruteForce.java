@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.io.*;
 import java.util.Scanner;
 import java.util.stream.Stream;
-import java.util.Arrays;
 
 public class BruteForce {
 
@@ -28,8 +27,9 @@ public class BruteForce {
 
     //RainbowPasswordHashesBF
     private File rainbowList;
+    private File rainbowListHashesmd;
+    private File rainbowListHashes256;
     private File rainbowListHashes;
-
 
     //Inputs
     private String type;
@@ -50,8 +50,11 @@ public class BruteForce {
             e.printStackTrace();
         }
 
-        //Dictionary File
+        //Files
         tenwords = new File("Dictionary_10k Password.txt");
+        rainbowListHashesmd = new File ("D:\\MD5Hashes.txt");
+        rainbowListHashes256 = new File ("D:\\SHA256Hashes.txt");
+
 
         //type of Hashing Objects
         md = new MD5();
@@ -70,6 +73,7 @@ public class BruteForce {
 
 
         //Testing
+        BruteForceRunner();
         RainbowTableArrRunner();
 
 
@@ -151,16 +155,16 @@ public class BruteForce {
             if (start != 0) {
                 i = start;
             }
-            for (i = 0; i < characters.length(); i++) {
-                arr.set(k, characters.substring(i, i + 1));
+            for (i = 0; i < charactersEZ.length; i++) {
+                arr.set(k, charactersEZ[i]);
                try {
                     rainbow.write(toString() + " ");
                     rainbowMD5.write (md.MD5(toString()) + " ");
-                    rainbow256.write (sha256.SHA256Encode(toString()) + " ");
+                    rainbow256.write (sha256.SHA256Hash(toString()) + " ");
                 } catch (IOException e) {
                    e.printStackTrace();
                }
-               if (check (md.MD5(toString()), sha256.SHA256Encode(toString()), toString ()) )
+               if (check (md.MD5(toString()), sha256.SHA256Hash(toString()), toString ()) )
                 System.out.println(arr.toString());
                 RainbowTableArr(k + 1, stop,0);
             }
@@ -175,28 +179,32 @@ public class BruteForce {
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
+        String lastPassword = "";
         //set stuff from last text file to string
-        String lastPassword = sc.nextLine();
-        for (int i = 0; i < lastPassword.length (); i++) {
-            if (i==lastPassword.length () -1) {
-                arr.add (i,lastPassword.substring (i));
-            } else {
-                arr.add (i,lastPassword.substring (i,i+1));
+        if (sc.hasNextLine()) {
+            lastPassword = sc.nextLine();
+            for (int i = 0; i < lastPassword.length(); i++) {
+                if (i == lastPassword.length() - 1) {
+                    arr.add(i, lastPassword.substring(i));
+                } else {
+                    arr.add(i, lastPassword.substring(i, i + 1));
+                }
             }
         }
-
+        System.out.print (lastPassword);
         try {
-            rainbow256 = new FileWriter(rainbowListHashes, true);
-            rainbowMD5 = new FileWriter(rainbowListHashes, true);
+            rainbow256 = new FileWriter(rainbowListHashesmd, true);
+            rainbowMD5 = new FileWriter(rainbowListHashes256, true);
         } catch (IOException e) {
             e.printStackTrace();
         }
 
-        for (int i =0; i < 3; i++) {
+        for (int i =1; i <= 10; i++) {
             arr.add ("");
+            //Stop is how many characters total you want the password to be
+            RainbowTableArr (0, i,characters.indexOf (lastPassword.substring (lastPassword.length()-1)));
         }
-        //Stop is how many characters total you want the password to be
-        RainbowTableArr (0, 32,lastPassword.indexOf (lastPassword.substring (lastPassword.length()-1)));
+
 
     }
 

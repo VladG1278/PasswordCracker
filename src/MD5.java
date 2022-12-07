@@ -12,7 +12,7 @@ public class MD5 {
     File tenwordshash;
 
     public MD5() {
-        tenwordshash = new File("MD5 Hashes.txt");
+        tenwordshash = new File("D:\\MD5Hashes.txt");
     }
 
     //Converts a string to its md5 hash
@@ -36,7 +36,7 @@ public class MD5 {
     public String findPasswordRainbowTable(String hash) {
         Scanner sc = null;
         try {
-            sc = new Scanner(tenwordshash).useDelimiter("\\s*\n\\s");
+            sc = new Scanner(tenwordshash).useDelimiter("\\s* \\s");
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }

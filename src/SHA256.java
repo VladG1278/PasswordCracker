@@ -9,11 +9,10 @@ public class SHA256 {
     File SHA256Hash;
 
     public SHA256() {
-        SHA256Hash = new File("SHA-256 Hash.txt");
-        System.out.println (SHA256Encode("test"));
+        SHA256Hash = new File("D:\\SHA256Hashes.txt");
     }
 
-    public String SHA256Encode(String SHA256) {
+    public String SHA256Hash(String SHA256) {
         try {
             java.security.MessageDigest sha = java.security.MessageDigest.getInstance("SHA-256");
             byte[] array = sha.digest(SHA256.getBytes());
@@ -33,7 +32,7 @@ public class SHA256 {
         public String findPasswordRainbowTable (String hash){
             Scanner sc = null;
             try {
-                sc = new Scanner(SHA256Hash).useDelimiter("\\s*\n\\s");
+                sc = new Scanner(SHA256Hash).useDelimiter("\\s* \\s");
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
             }

@@ -28,7 +28,7 @@ public class PassCrack {
                 System.out.println (m.MD5 (string));
             } else if (args [1].equals ("-S")){
                 SHA256 s = new SHA256();
-                System.out.println (s.SHA256Encode(string));
+                System.out.println (s.SHA256Hash(string));
             } else if (args [1].equals ("-B")){
                 BCryptHash b = new BCryptHash();
                 System.out.println (b.BCryptEncode(string));
