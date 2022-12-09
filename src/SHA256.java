@@ -9,7 +9,7 @@ public class SHA256 {
     File SHA256Hash;
 
     public SHA256() {
-        SHA256Hash = new File("D:\\SHA256Hashes.txt");
+        SHA256Hash = new File("SHA-256 Hash.txt");
     }
 
     public String SHA256Hash(String SHA256) {
@@ -32,7 +32,7 @@ public class SHA256 {
         public String findPasswordRainbowTable (String hash){
             Scanner sc = null;
             try {
-                sc = new Scanner(SHA256Hash).useDelimiter("\\s* \\s");
+                sc = new Scanner(SHA256Hash).useDelimiter("\\s*\n\\s");
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
             }

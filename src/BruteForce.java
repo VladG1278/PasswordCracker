@@ -18,6 +18,7 @@ public class BruteForce {
     FileWriter rainbow;
     FileWriter rainbowMD5;
     FileWriter rainbow256;
+    FileWriter checkFinal;
 
 
     //Objects to run methods in Class
@@ -34,6 +35,8 @@ public class BruteForce {
     //Inputs
     private String type;
     private String input;
+
+    Boolean finished = true;
 
     public BruteForce(String type, String string) {
         this.type = type;
@@ -74,7 +77,7 @@ public class BruteForce {
 
         //Testing
         BruteForceRunner();
-        RainbowTableArrRunner();
+        //RainbowTableArrRunner();
 
 
     }
@@ -123,19 +126,22 @@ public class BruteForce {
     public String findPasswordRainbowTable(String hash) {
         Scanner sc = null;
         try {
-            sc = new Scanner(rainbowListHashes).useDelimiter("\\s* \\s");
+            sc = new Scanner(rainbowListHashes);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
         int line = -1;
         String tempHash;
         String password = "Not Found";
-        while (sc.hasNextLine()) {
+        while (sc.hasNext()) {
+            tempHash = "";
             line++;
-            tempHash = sc.nextLine();
+            tempHash = sc.next().replace (" ", "");
+
+            //This needs to be adjusted for spaces instead of new lines!!!!!!
             //Stream Stuff From: https://www.educative.io/answers/reading-the-nth-line-from-a-file-in-java
             if (hash.equals(tempHash)) {
-                try (Stream<String> lines = Files.lines(Paths.get("rainbowList.txt"))) {
+                try (Stream<String> lines = Files.lines(Paths.get("D:\\RainbowPasswordList.txt"))) {
                     password = lines.skip(line).findFirst().get();
                 } catch (IOException e) {
                     e.printStackTrace();
@@ -156,23 +162,43 @@ public class BruteForce {
                 i = start;
             }
             for (i = 0; i < charactersEZ.length; i++) {
-                arr.set(k, charactersEZ[i]);
-               try {
-                    rainbow.write(toString() + " ");
-                    rainbowMD5.write (md.MD5(toString()) + " ");
-                    rainbow256.write (sha256.SHA256Hash(toString()) + " ");
-                } catch (IOException e) {
-                   e.printStackTrace();
-               }
-               if (check (md.MD5(toString()), sha256.SHA256Hash(toString()), toString ()) )
-                System.out.println(arr.toString());
-                RainbowTableArr(k + 1, stop,0);
+                if (finished) {
+                    arr.set(k, charactersEZ[i]);
+
+                    try {
+                        rainbow.write(toString() + " ");
+                        rainbowMD5.write(md.MD5(toString()) + " ");
+                        rainbow256.write(sha256.SHA256Hash(toString()) + " ");
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                    if (check(md.MD5(toString()), sha256.SHA256Hash(toString()), toString())) {
+                        try {
+                            checkFinal.write(toString());
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                        try {
+                            rainbow.close();
+                            rainbowMD5.close();
+                            rainbow256.close();
+                            checkFinal.close();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                        finished = false;
+                        break;
+                    }
+                    RainbowTableArr(k + 1, stop, 0);
+                }
             }
         }
     }
 
     public void RainbowTableArrRunner() {
+        System.out.println ("Fail");
         File finalC = new File ("D:\\FinalCheck.txt");
+        boolean start = false;
         Scanner sc = null;
         try {
             sc = new Scanner (finalC);
@@ -183,31 +209,38 @@ public class BruteForce {
         //set stuff from last text file to string
         if (sc.hasNextLine()) {
             lastPassword = sc.nextLine();
-            for (int i = 0; i < lastPassword.length(); i++) {
-                if (i == lastPassword.length() - 1) {
-                    arr.add(i, lastPassword.substring(i));
-                } else {
-                    arr.add(i, lastPassword.substring(i, i + 1));
+            start = true;
+            if (lastPassword.length() > 0) {
+                for (int i = 0; i < lastPassword.length(); i++) {
+                    if (i == lastPassword.length() - 1) {
+                        arr.add(i, lastPassword.substring(i));
+                    } else {
+                        arr.add(i, lastPassword.substring(i, i + 1));
+                    }
                 }
             }
         }
-        System.out.print (lastPassword);
         try {
-            rainbow256 = new FileWriter(rainbowListHashesmd, true);
-            rainbowMD5 = new FileWriter(rainbowListHashes256, true);
+            rainbow256 = new FileWriter(rainbowListHashes256, true);
+            rainbowMD5 = new FileWriter(rainbowListHashesmd,true);
+            checkFinal = new FileWriter ("D:\\FinalCheck.txt");
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-        for (int i =1; i <= 10; i++) {
-            arr.add ("");
+        int i =0;
+        while (finished) {
+            i++;
+            arr.add("");
             //Stop is how many characters total you want the password to be
-            RainbowTableArr (0, i,characters.indexOf (lastPassword.substring (lastPassword.length()-1)));
+            if (i== 1 && start == true) {
+                RainbowTableArr(0, i, characters.indexOf(lastPassword.substring(lastPassword.length() - 1)));
+            } else {
+                RainbowTableArr(0,i,0);
+            }
         }
-
+            System.out.println(toString());
 
     }
-
     public Boolean check (String md5, String sha, String plainText) {
 
         if (input.equals (md5)) {

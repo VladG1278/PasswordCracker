@@ -30,6 +30,7 @@ public class Dictionary {
            //b = new BCryptHash();
             b = new BCrypt();
         //  password = b.findPasswordRainbowTable(hash);
+
             if (password.equals("Not Found")) {
                 System.out.println ("The password was not found. Please use the Brute Force attack for better results.");
             } else {
