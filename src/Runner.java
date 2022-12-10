@@ -9,17 +9,22 @@ public class Runner {
         //BCryptHash a = new BCryptHash();
         //System.out.println(a.hashpw("test", a.gensalt()));
         //System.out.println(a.checkpw("testing", a.hashpw("test",a.gensalt())));
-        /*String hash = "$2a$10$1BHTSuFNQukWXrj1Gk0H2e/0Qa/vvOrDj8WXOAa5Kzmn9Z7ADPKza";
-        String [] sepHash = hash.split("$", 4);
-        for(int i = 0; i < sepHash.length; i++){
-            System.out.println(sepHash[i]);
-        }
+        String hash = "$2a$10$1BHTSuFNQukWXrj1Gk0H2e/0Qa/vvOrDj8WXOAa5Kzmn9Z7ADPKza";
+        //String [] sepHash = hash.split("$", 4);
+        String temp = hash;
+        String version = "";
+        String  costfactor = "";
+        String salt = "";
+        String pass = "";
 
-         */
-        BCryptHash b = new BCryptHash();
-        String a = b.BCryptHash("test");
-        System.out.println (a);
-        System.out.println (BCrypt.checkpw("test",a));
+        version = hash.substring(1,3);
+        costfactor = hash.substring(4,6);
+        hash = hash.substring(hash.lastIndexOf("$")+1);
+        salt = hash.substring(0,23);
+        hash = hash.substring(23);
+
+
+
     }
 
 
