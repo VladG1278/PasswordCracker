@@ -36,7 +36,9 @@ public class BruteForce {
     private String type;
     private String input;
 
+    //Checks
     Boolean finished = true;
+    Boolean Bcrypt = false;
 
     public BruteForce(String type, String string) {
         this.type = type;
@@ -86,14 +88,13 @@ public class BruteForce {
 
     // this method will use brute force to find the correct password for the hash
     public String BruteForceRunner() {
-        Scanner sc = null;
-        try {
-            sc = new Scanner(rainbowList).useDelimiter("\\s* \\s");
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
+
         if (type.equals("-B")) {
             bcrypt = new BCryptHash();
+            //hash everything in file then start generating if needed
+            //if not found by using file then use:
+            //Bcrypt = true;
+
         } else {
             if (type.equals("-M")) {
                 rainbowListHashes = new File("D:\\MD5Hashes.txt");
@@ -126,19 +127,17 @@ public class BruteForce {
     public String findPasswordRainbowTable(String hash) {
         Scanner sc = null;
         try {
-            sc = new Scanner(rainbowListHashes);
+            sc = new Scanner(rainbowListHashes).useDelimiter("\\s*\n\\s");
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
         int line = -1;
         String tempHash;
         String password = "Not Found";
-        while (sc.hasNext()) {
-            tempHash = "";
+        while (sc.hasNextLine()) {
             line++;
-            tempHash = sc.next().replace (" ", "");
+            tempHash = sc.nextLine();
 
-            //This needs to be adjusted for spaces instead of new lines!!!!!!
             //Stream Stuff From: https://www.educative.io/answers/reading-the-nth-line-from-a-file-in-java
             if (hash.equals(tempHash)) {
                 try (Stream<String> lines = Files.lines(Paths.get("D:\\RainbowPasswordList.txt"))) {
@@ -166,13 +165,17 @@ public class BruteForce {
                     arr.set(k, charactersEZ[i]);
 
                     try {
-                        rainbow.write(toString() + " ");
+                        rainbow.write(toString() + "\n");
                         rainbowMD5.write(md.MD5(toString()) + " ");
                         rainbow256.write(sha256.SHA256Hash(toString()) + " ");
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
-                    if (check(md.MD5(toString()), sha256.SHA256Hash(toString()), toString())) {
+                    if (Bcrypt) {
+                        //hash toString
+                        //if it matches hash close filewriters write tofinalCheck and printout plain text.
+
+                    }else if (check(md.MD5(toString()), sha256.SHA256Hash(toString()), toString())) {
                         try {
                             checkFinal.write(toString());
                         } catch (IOException e) {

@@ -23,9 +23,6 @@ public class BCryptHash {
     public String findPasswordRainbowTable(String hash) {
        Scanner sc = null;
        String password;
-       String salt;
-       String costfactor;
-       String [] sepHash = hash.split("$", 4);
 
         try {
             sc = new Scanner (Dictionary).useDelimiter("\\s*\n\\s");
@@ -34,14 +31,10 @@ public class BCryptHash {
         }
 
         while (sc.hasNextLine()) {
-          //password =  File.readLine(Dictionary);
             password = sc.nextLine ();
-            //find salt and then hash plain
             if (BCrypt.checkpw (password, hash)) {
                 return password;
             }
-            //System.out.println(a.checkpw("testing", a.hashpw("test",a.gensalt())));
-
         }
 
         return "Not Found";

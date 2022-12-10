@@ -16,7 +16,10 @@ public class Runner {
         }
 
          */
-
+        BCryptHash b = new BCryptHash();
+        String a = b.BCryptHash("test");
+        System.out.println (a);
+        System.out.println (BCrypt.checkpw("test",a));
     }
 
 
