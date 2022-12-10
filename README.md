@@ -41,7 +41,13 @@ Formatting:
   
  Notes: 
   - Rainbow Table files should be stored on a external hard drive due to the large file size 
-  - We will include a Rainbow Table with the first 8 characters of plaintext passwordsat a later time
+  - We will include a Rainbow Table with the first 8 characters of plaintext passwords at a later time
+  - In order to run this program you will need to create several text files:
+  
+      -FinalCheck.txt (put the letter "a" in it)
+      -MD5Hashes.txt 
+      -RainbowPasswordList.txt
+      -SHA256Hashes.txt
 
  Bugs:
-  -  the last text that was tested will repeat twice in the text file (Rainbow Table file)
+  -  the last text that was tested before the program is finished repeats twice in the files above
