@@ -41,7 +41,7 @@ Formatting:
   
  Notes: 
   - Rainbow Table files should be stored on a external hard drive due to the large file size 
-  - We have included a Rainbow Table with the first 8 characters of plaintext passwords 
+  - We will include a Rainbow Table with the first 8 characters of plaintext passwordsat a later time
 
  Bugs:
   -  the last text that was tested will repeat twice in the text file (Rainbow Table file)
