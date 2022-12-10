@@ -32,7 +32,7 @@ public class MD5 {
         return null;
     }
 
-    //Check a md5 hash against the 10k password list
+    //Check a md5 hash against the dictionary/10k Password list
     public String findPasswordRainbowTable(String hash) {
         Scanner sc = null;
         try {

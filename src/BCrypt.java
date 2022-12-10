@@ -60,7 +60,7 @@ import java.security.SecureRandom;
  */
 public class BCrypt {
 	// BCrypt parameters
-	private static final int GENSALT_DEFAULT_LOG2_ROUNDS = 10;
+	private static final int GENSALT_DEFAULT_LOG2_ROUNDS = 4;
 	private static final int BCRYPT_SALT_LEN = 16;
 
 	// Blowfish parameters
@@ -724,7 +724,7 @@ public class BCrypt {
 		rs.append(Integer.toString(log_rounds));
 		rs.append("$");
 		rs.append(encode_base64(rnd, rnd.length));
-		System.out.print(rs);
+		//System.out.print(rs);
 		return rs.toString();
 	}
 

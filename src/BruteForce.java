@@ -40,6 +40,8 @@ public class BruteForce {
     Boolean finished = true;
     Boolean Bcrypt = false;
 
+
+    //This is the constructor that initializes the variables such as files, filewriters, etc.
     public BruteForce(String type, String string) {
         this.type = type;
         input = string;
@@ -76,33 +78,35 @@ public class BruteForce {
             charactersEZ[i] = characters.substring(i, i + 1);
         }
 
-
-        //Testing
-        BruteForceRunner();
-
-
-
     }
-// i when originally calling is the last character on the characters list that is in the txt file
-
+    //Mini Runner that controls the logic for checking files before generating new passwords
     public String BruteForceRunner() {
 
         if (type.equals("-B")) {
             bcrypt = new BCryptHash("-B");
-            if (bcrypt.findPasswordRainbowTable(input).equals ("Not Found")) {
+            String a = bcrypt.findPasswordRainbowTable(input);
+            if (a.equals ("Not Found")) {
                 Bcrypt = true;
                 RainbowTableArrRunner();
+            } else {
+                System.out.println ("\nYour password is: " + a);
             }
         } else {
             if (type.equals("-M")) {
                 rainbowListHashes = new File("D:\\MD5Hashes.txt");
-                if (findPasswordRainbowTable(input).equals("Not Found")) {
+                String a = findPasswordRainbowTable(input);
+                if (a.equals("Not Found")) {
                     RainbowTableArrRunner();
+                } else {
+                    System.out.println ("\nYour password is: " + a);
                 }
             } else if (type.equals("-S")) {
                 rainbowListHashes = new File("D:\\SHA256Hashes.txt");
-                if (findPasswordRainbowTable(input).equals("Not Found")) {
+                String a = findPasswordRainbowTable(input);
+                if (a.equals("Not Found")) {
                     RainbowTableArrRunner();
+                } else {
+                    System.out.println ("\nYour password is: " + a);
                 }
             }
 
@@ -121,7 +125,8 @@ public class BruteForce {
         return word;
     }
 
-    // program would go here to see if the password's hash is already in this list before creating new passwords
+    //This checks if the password hash is found in the rainbowtable
+    //It returns the password or "Not Found"
     public String findPasswordRainbowTable(String hash) {
         Scanner sc = null;
         try {
@@ -149,9 +154,12 @@ public class BruteForce {
         return password;
     }
 
-    //recursion to generate a whole bunch of text
+    //recursion to generate a whole bunch of text and write the hashes to file (except for BCrypt) ex. a b ... aa ab... aaa ... aab
+    //k is the index where you start in the array that will contain the generated text
+    //I is the index of the last character in the saved password so that we can restart from where we left off
+    //Stop is just the number of indexes in arr. When it matches k it adds a new index
+    //This will run until it finds your match
     public void RainbowTableArr(int k, int stop, int start) {
-
         if (k == stop) {
         } else {
             int i = 0;
@@ -164,8 +172,8 @@ public class BruteForce {
 
                     try {
                         rainbow.write(toString() + "\n");
-                        rainbowMD5.write(md.MD5(toString()) + " ");
-                        rainbow256.write(sha256.SHA256Hash(toString()) + " ");
+                        rainbowMD5.write(md.MD5(toString()) + "\n");
+                        rainbow256.write(sha256.SHA256Hash(toString()) + "\n");
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
@@ -188,7 +196,7 @@ public class BruteForce {
                             break;
                         }
 
-                    }else if (check(md.MD5(toString()), sha256.SHA256Hash(toString()), toString())) {
+                    }else if (check(md.MD5(toString()), sha256.SHA256Hash(toString()))) {
                         try {
                             checkFinal.write(toString());
                         } catch (IOException e) {
@@ -211,8 +219,8 @@ public class BruteForce {
         }
     }
 
+    //This runs the RainbowTableArr method and takes the input from the file FinalCheck to start the recursive generator
     public void RainbowTableArrRunner() {
-        System.out.println ("Fail");
         File finalC = new File ("D:\\FinalCheck.txt");
         boolean start = false;
         Scanner sc = null;
@@ -254,10 +262,12 @@ public class BruteForce {
                 RainbowTableArr(0,i,0);
             }
         }
-            System.out.println(toString());
+            System.out.println("\nYour Password is : " + toString());
 
     }
-    public Boolean check (String md5, String sha, String plainText) {
+
+    //Checks if an inputted MD5 hash (md5) or a SHA256 hash (sha) is equal to the inputted hash
+    public Boolean check (String md5, String sha) {
 
         if (input.equals (md5)) {
             return true;

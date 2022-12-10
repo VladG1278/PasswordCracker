@@ -1,17 +1,19 @@
 public class PassCrack {
+
+    //Runs the program by taking in some arguments
     public static void main(String[] args) {
         if (args.length != 3) {
             man();
         } else {
 
             String string = args[2];
-            if (args[0].equals("-BF")) {
+            if (args[0].equals("-B")) {
                 if (args[1].equals("-M")) {
-
+                    BruteForce b = new BruteForce ("-M", string);
                 } else if (args[1].equals("-S")) {
-
+                    BruteForce b = new BruteForce ("-S", string);
                 } else if (args[1].equals("-B")) {
-
+                    BruteForce b = new BruteForce ("-B", string);
                 }
 
             } else if (args[0].equals("-D")) {
@@ -40,11 +42,9 @@ public class PassCrack {
             }
         }
     }
+    //Prints out a message if something is wrong
     public static void man () {
-
-
-
-
+        System.out.println ("Something you entered was not correct.\nPlease check the README for more information.");
     }
 
 

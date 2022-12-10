@@ -30,12 +30,13 @@ public class BCryptHash {
 
     }
 
-
+    //Hashes a string using bcrypt and a random generated salt
     public String BCryptHash(String b) {
         return BCrypt.hashpw(b, BCrypt.gensalt());
     }
 
-    // this will find the password in the large dictionary 10k file
+    // this will check if the plain text from the dictionary file or the generated text file is equal to a bcrypt hash
+    //This implents mindrot's checkpw method
     public String findPasswordRainbowTable(String hash) {
         Scanner sc = null;
         String password;
@@ -56,6 +57,8 @@ public class BCryptHash {
         return "Not Found";
     }
 
+    //Finds the Salt, Version, and Cost Factor of A Bcrypt Hash
+    //Currently not Implemented in the Program
     public String findSalt(String hashIn){
         String hash = hashIn;
         version = hash.substring(1,3);

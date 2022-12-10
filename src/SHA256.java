@@ -12,6 +12,7 @@ public class SHA256 {
         SHA256Hash = new File("SHA-256 Hash.txt");
     }
 
+    //Hashes plaintext using SHA256
     public String SHA256Hash(String SHA256) {
         try {
             java.security.MessageDigest sha = java.security.MessageDigest.getInstance("SHA-256");
@@ -28,7 +29,7 @@ public class SHA256 {
 
     }
 
-
+        //Finds SHA256 if it is lcoated in the Dictionary
         public String findPasswordRainbowTable (String hash){
             Scanner sc = null;
             try {
