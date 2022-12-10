@@ -5,7 +5,7 @@ public class Dictionary {
     String hash;
     MD5 m;
     SHA256 s;
-    BCrypt b;
+    BCryptHash b;
 
     public Dictionary(String hashType, String hash) {
         this.hash = hash;
@@ -27,8 +27,9 @@ public class Dictionary {
                 System.out.println ("The password that matches the hash is: " + password);
             }
         } else if (hashType.equals("-B")) {
-           //b = new BCryptHash();
-            b = new BCrypt();
+           b = new BCryptHash("-D");
+           b.findPasswordRainbowTable(hash);
+
         //  password = b.findPasswordRainbowTable(hash);
 
             if (password.equals("Not Found")) {

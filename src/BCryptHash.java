@@ -15,8 +15,13 @@ public class BCryptHash {
     private String version;
     private String hash;
 
-    public BCryptHash() {
-        Dictionary = new File ("Dictionary_10k Password.txt");
+    public BCryptHash(String type) {
+        if (type.equals ("-D")) {
+            Dictionary = new File ("Dictionary_10k Password.txt");
+        } else {
+            Dictionary = new File ("D:\\RainbowPasswordList.txt");
+        }
+
 
         salt = "";
         costfactor = "";
@@ -27,38 +32,26 @@ public class BCryptHash {
 
 
     public String BCryptHash(String b) {
-
-        if(salt.length() == 0 ){
-            return BCrypt.hashpw(b, BCrypt.gensalt());
-        }
-        else{
-            return BCrypt.hashpw(b, salt);
-        }
+        return BCrypt.hashpw(b, BCrypt.gensalt());
     }
 
     // this will find the password in the large dictionary 10k file
     public String findPasswordRainbowTable(String hash) {
-       Scanner sc = null;
-       String password = "";
-       salt = findSalt(hash);
+        Scanner sc = null;
+        String password;
+
         try {
             sc = new Scanner (Dictionary).useDelimiter("\\s*\n\\s");
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
 
-        /* while (sc.hasNextLine()) {
-           password = sc.nextLine ();
-          //if(BCryptHash(password).equals(hash);
-            //find salt and then hash plain
+        while (sc.hasNextLine()) {
+            password = sc.nextLine ();
             if (BCrypt.checkpw (password, hash)) {
                 return password;
             }
-            //System.out.println(a.checkpw("testing", a.hashpw("test",a.gensalt())));
-
         }
-
-         */
 
         return "Not Found";
     }

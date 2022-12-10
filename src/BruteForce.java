@@ -24,7 +24,7 @@ public class BruteForce {
     //Objects to run methods in Class
     SHA256 sha256;
     MD5 md;
-    BCryptHash bcrypt = new BCryptHash();
+    BCryptHash bcrypt;
 
     //RainbowPasswordHashesBF
     private File rainbowList;
@@ -79,22 +79,20 @@ public class BruteForce {
 
         //Testing
         BruteForceRunner();
-        //RainbowTableArrRunner();
+
 
 
     }
 // i when originally calling is the last character on the characters list that is in the txt file
 
-
-    // this method will use brute force to find the correct password for the hash
     public String BruteForceRunner() {
 
         if (type.equals("-B")) {
-            bcrypt = new BCryptHash();
-            //hash everything in file then start generating if needed
-            //if not found by using file then use:
-            //Bcrypt = true;
-
+            bcrypt = new BCryptHash("-B");
+            if (bcrypt.findPasswordRainbowTable(input).equals ("Not Found")) {
+                Bcrypt = true;
+                RainbowTableArrRunner();
+            }
         } else {
             if (type.equals("-M")) {
                 rainbowListHashes = new File("D:\\MD5Hashes.txt");
@@ -172,8 +170,23 @@ public class BruteForce {
                         e.printStackTrace();
                     }
                     if (Bcrypt) {
-                        //hash toString
-                        //if it matches hash close filewriters write tofinalCheck and printout plain text.
+                        if (BCrypt.checkpw (toString(), input)) {
+                            try {
+                                checkFinal.write(toString());
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+                            try {
+                                rainbow.close();
+                                rainbowMD5.close();
+                                rainbow256.close();
+                                checkFinal.close();
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+                            finished = false;
+                            break;
+                        }
 
                     }else if (check(md.MD5(toString()), sha256.SHA256Hash(toString()), toString())) {
                         try {
