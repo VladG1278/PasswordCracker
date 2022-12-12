@@ -7,7 +7,7 @@ public class PassCrack {
         } else {
 
             String string = args[2];
-            if (args[0].equals("-B")) {
+            if (args[0].equals("-BF")) {
                 if (args[1].equals("-M")) {
                     BruteForce b = new BruteForce ("-M", string);
                 } else if (args[1].equals("-S")) {

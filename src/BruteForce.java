@@ -42,8 +42,8 @@ public class BruteForce {
 
 
     //This is the constructor that initializes the variables such as files, filewriters, etc.
-    public BruteForce(String type, String string) {
-        this.type = type;
+    public BruteForce(String type1, String string) {
+        type = type1;
         input = string;
 
         //Rainbow Password List
@@ -77,10 +77,11 @@ public class BruteForce {
             }
             charactersEZ[i] = characters.substring(i, i + 1);
         }
-
+        BruteForceRunner ();
     }
+
     //Mini Runner that controls the logic for checking files before generating new passwords
-    public String BruteForceRunner() {
+    public void BruteForceRunner() {
 
         if (type.equals("-B")) {
             bcrypt = new BCryptHash("-B");
@@ -111,9 +112,6 @@ public class BruteForce {
             }
 
         }
-
-
-        return "Not Found";
     }
 
     //Converts ArrayList to a one word String
